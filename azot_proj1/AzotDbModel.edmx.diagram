@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a79830eda85b4beba492d01aa343735a" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="azot_db1Model.sensor_types" Width="1.5" PointX="2.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="azot_db1Model.sensors" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="azot_db1Model.warnings" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="azot_db1Model.workshop" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="azot_db1Model.FK__sensors__sensor___4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="azot_db1Model.FK__sensors__worksho__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="azot_db1Model.FK__warnings__sensor__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="azot_db1Model.FK__warnings__worksh__47DBAE45" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

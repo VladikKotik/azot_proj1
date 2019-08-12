@@ -1,0 +1,28 @@
+﻿@using azot_proj1
+@model azot_db1Entities
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            @foreach (azot_proj1.workshop w in Model.workshop.ToList())
+            {
+                <tr>
+                    <td> @w.id</td>
+                    <td>  @w.name</td>
+                    </tr>}
+                    </table>
+                    </div>
+                    </body>
+                    </html>

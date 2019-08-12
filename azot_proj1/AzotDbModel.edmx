@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="azot_db1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sensor_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="normal_value" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sensors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sensor_type_id" Type="int" />
+          <Property Name="workshop_id" Type="int" />
+        </EntityType>
+        <EntityType Name="warnings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dangerous_value" Type="varchar" MaxLength="255" />
+          <Property Name="warning_time" Type="datetime" />
+          <Property Name="sensor_id" Type="int" />
+          <Property Name="workshop_id" Type="int" />
+        </EntityType>
+        <EntityType Name="workshop">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__sensors__sensor___4222D4EF">
+          <End Role="sensor_types" Type="Self.sensor_types" Multiplicity="0..1" />
+          <End Role="sensors" Type="Self.sensors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sensor_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sensors">
+              <PropertyRef Name="sensor_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sensors__worksho__4316F928">
+          <End Role="workshop" Type="Self.workshop" Multiplicity="0..1" />
+          <End Role="sensors" Type="Self.sensors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workshop">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sensors">
+              <PropertyRef Name="workshop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__warnings__sensor__46E78A0C">
+          <End Role="sensors" Type="Self.sensors" Multiplicity="0..1" />
+          <End Role="warnings" Type="Self.warnings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sensors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="warnings">
+              <PropertyRef Name="sensor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__warnings__worksh__47DBAE45">
+          <End Role="workshop" Type="Self.workshop" Multiplicity="0..1" />
+          <End Role="warnings" Type="Self.warnings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workshop">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="warnings">
+              <PropertyRef Name="workshop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="azot_db1ModelStoreContainer">
+          <EntitySet Name="sensor_types" EntityType="Self.sensor_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sensors" EntityType="Self.sensors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="warnings" EntityType="Self.warnings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="workshop" EntityType="Self.workshop" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__sensors__sensor___4222D4EF" Association="Self.FK__sensors__sensor___4222D4EF">
+            <End Role="sensor_types" EntitySet="sensor_types" />
+            <End Role="sensors" EntitySet="sensors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sensors__worksho__4316F928" Association="Self.FK__sensors__worksho__4316F928">
+            <End Role="workshop" EntitySet="workshop" />
+            <End Role="sensors" EntitySet="sensors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__warnings__sensor__46E78A0C" Association="Self.FK__warnings__sensor__46E78A0C">
+            <End Role="sensors" EntitySet="sensors" />
+            <End Role="warnings" EntitySet="warnings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__warnings__worksh__47DBAE45" Association="Self.FK__warnings__worksh__47DBAE45">
+            <End Role="workshop" EntitySet="workshop" />
+            <End Role="warnings" EntitySet="warnings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="azot_db1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sensor_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="normal_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="sensors" Relationship="Self.FK__sensors__sensor___4222D4EF" FromRole="sensor_types" ToRole="sensors" />
+        </EntityType>
+        <EntityType Name="sensors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sensor_type_id" Type="Int32" />
+          <Property Name="workshop_id" Type="Int32" />
+          <NavigationProperty Name="sensor_types" Relationship="Self.FK__sensors__sensor___4222D4EF" FromRole="sensors" ToRole="sensor_types" />
+          <NavigationProperty Name="workshop" Relationship="Self.FK__sensors__worksho__4316F928" FromRole="sensors" ToRole="workshop" />
+          <NavigationProperty Name="warnings" Relationship="Self.FK__warnings__sensor__46E78A0C" FromRole="sensors" ToRole="warnings" />
+        </EntityType>
+        <EntityType Name="warnings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dangerous_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="warning_time" Type="DateTime" Precision="3" />
+          <Property Name="sensor_id" Type="Int32" />
+          <Property Name="workshop_id" Type="Int32" />
+          <NavigationProperty Name="sensors" Relationship="Self.FK__warnings__sensor__46E78A0C" FromRole="warnings" ToRole="sensors" />
+          <NavigationProperty Name="workshop" Relationship="Self.FK__warnings__worksh__47DBAE45" FromRole="warnings" ToRole="workshop" />
+        </EntityType>
+        <EntityType Name="workshop">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="sensors" Relationship="Self.FK__sensors__worksho__4316F928" FromRole="workshop" ToRole="sensors" />
+          <NavigationProperty Name="warnings" Relationship="Self.FK__warnings__worksh__47DBAE45" FromRole="workshop" ToRole="warnings" />
+        </EntityType>
+        <Association Name="FK__sensors__sensor___4222D4EF">
+          <End Role="sensor_types" Type="Self.sensor_types" Multiplicity="0..1" />
+          <End Role="sensors" Type="Self.sensors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sensor_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sensors">
+              <PropertyRef Name="sensor_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sensors__worksho__4316F928">
+          <End Role="workshop" Type="Self.workshop" Multiplicity="0..1" />
+          <End Role="sensors" Type="Self.sensors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workshop">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sensors">
+              <PropertyRef Name="workshop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__warnings__sensor__46E78A0C">
+          <End Role="sensors" Type="Self.sensors" Multiplicity="0..1" />
+          <End Role="warnings" Type="Self.warnings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sensors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="warnings">
+              <PropertyRef Name="sensor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__warnings__worksh__47DBAE45">
+          <End Role="workshop" Type="Self.workshop" Multiplicity="0..1" />
+          <End Role="warnings" Type="Self.warnings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workshop">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="warnings">
+              <PropertyRef Name="workshop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="azot_db1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sensor_types" EntityType="Self.sensor_types" />
+          <EntitySet Name="sensors" EntityType="Self.sensors" />
+          <EntitySet Name="warnings" EntityType="Self.warnings" />
+          <EntitySet Name="workshop" EntityType="Self.workshop" />
+          <AssociationSet Name="FK__sensors__sensor___4222D4EF" Association="Self.FK__sensors__sensor___4222D4EF">
+            <End Role="sensor_types" EntitySet="sensor_types" />
+            <End Role="sensors" EntitySet="sensors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sensors__worksho__4316F928" Association="Self.FK__sensors__worksho__4316F928">
+            <End Role="workshop" EntitySet="workshop" />
+            <End Role="sensors" EntitySet="sensors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__warnings__sensor__46E78A0C" Association="Self.FK__warnings__sensor__46E78A0C">
+            <End Role="sensors" EntitySet="sensors" />
+            <End Role="warnings" EntitySet="warnings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__warnings__worksh__47DBAE45" Association="Self.FK__warnings__worksh__47DBAE45">
+            <End Role="workshop" EntitySet="workshop" />
+            <End Role="warnings" EntitySet="warnings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="azot_db1ModelStoreContainer" CdmEntityContainer="azot_db1Entities">
+          <EntitySetMapping Name="sensor_types">
+            <EntityTypeMapping TypeName="azot_db1Model.sensor_types">
+              <MappingFragment StoreEntitySet="sensor_types">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="normal_value" ColumnName="normal_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sensors">
+            <EntityTypeMapping TypeName="azot_db1Model.sensors">
+              <MappingFragment StoreEntitySet="sensors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sensor_type_id" ColumnName="sensor_type_id" />
+                <ScalarProperty Name="workshop_id" ColumnName="workshop_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="warnings">
+            <EntityTypeMapping TypeName="azot_db1Model.warnings">
+              <MappingFragment StoreEntitySet="warnings">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dangerous_value" ColumnName="dangerous_value" />
+                <ScalarProperty Name="warning_time" ColumnName="warning_time" />
+                <ScalarProperty Name="sensor_id" ColumnName="sensor_id" />
+                <ScalarProperty Name="workshop_id" ColumnName="workshop_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="workshop">
+            <EntityTypeMapping TypeName="azot_db1Model.workshop">
+              <MappingFragment StoreEntitySet="workshop">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
