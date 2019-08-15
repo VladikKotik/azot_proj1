@@ -3,23 +3,29 @@
 
 
 <div>
-    <table border="1">
+    <table border="1" align="left">
+        <tr>
+            <th>id нарушения</th>
+            <th>Название типа датчика</th>
+            <th>Допустимое значение</th>
+            <th>Датчик</th>
+            <th>Зафиксированное значение</th>
+            <th>Время нарушения</th>
+            
+        </tr>
         @foreach (azot_proj1.Models.QueryResultModel d in Model)
     {
         <tr>
             <td> @d.warn_id</td>
             <td>  @d.sensor_type_name</td>
             <td>@d.normal_value</td>
-            
+
             <td>@d.sensor_name</td>
             <td>@d.dangerous_value</td>
             <td>@d.warning_time</td>
         </tr>}
 
     </table>
-
-
-
 </div>
 
 

@@ -12,7 +12,7 @@ namespace azot_proj1.Controllers
     {
 
         public azot_db1Entities db;
-        // GET: Home
+        
         public ActionResult Index()
         {
             return View("indexView",db);

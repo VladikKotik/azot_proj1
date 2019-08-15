@@ -74,11 +74,7 @@ namespace azot_proj1
                 .Include("sensors")               
                 .Where(c => c.id == in_id)
                 .Select(c => c);
-/*select st.name,s.name,warn.dangerous_value,st.normal_value,warn.warning_time 
-	from  sensors s 
-	inner join warnings warn on warn.sensor_id=s.id
-	inner join sensor_types st on s.sensor_type_id=st.id 
-	where s.id=1;*/
+
             foreach (warnings w in mywarnings)
             {
                 res.Add(new QueryResultModel
