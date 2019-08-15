@@ -16,11 +16,12 @@ namespace azot_proj1
     {
         public int id { get; set; }
         public string dangerous_value { get; set; }
-        public Nullable<System.DateTime> warning_time { get; set; }
+        public System.DateTime warning_time { get; set; }
         public Nullable<int> sensor_id { get; set; }
         public Nullable<int> workshop_id { get; set; }
     
         public virtual sensors sensors { get; set; }
         public virtual workshop workshop { get; set; }
+        
     }
 }

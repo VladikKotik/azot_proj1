@@ -14,15 +14,34 @@
     <title></title>
 </head>
 <body>
+    
+    
     <div>
+
+
+
+        @using System.Web.Optimization
+        @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+        @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+      
+
         <table border="1">
             @foreach (azot_proj1.workshop w in Model.workshop.ToList())
-            {
-                <tr>
-                    <td> @w.id</td>
-                    <td>  @w.name</td>
-                    </tr>}
-                    </table>
-                    </div>
-                    </body>
-                    </html>
+        {
+            <tr>
+                <td> @w.id</td>
+                <td>  @w.name</td>
+                <td>@Ajax.ActionLink(linkText: "info", actionName: "WarningsOfWorkshop", routeValues: new { in_id = w.id }, ajaxOptions: new AjaxOptions { UpdateTargetId = "results" })</td>
+
+            </tr>
+    }
+
+
+        </table>
+
+        <div id="results"></div>
+
+    </div>
+</body>
+</html>

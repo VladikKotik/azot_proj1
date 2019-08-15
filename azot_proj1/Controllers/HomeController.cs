@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using azot_proj1.Models;
 using azot_proj1;
+using azot_proj1.Models;
 
 namespace azot_proj1.Controllers
 {
@@ -16,6 +16,13 @@ namespace azot_proj1.Controllers
         public ActionResult Index()
         {
             return View("indexView",db);
+        }
+
+        
+        public ActionResult WarningsOfWorkshop(int in_id)
+        {
+            List<QueryResultModel> list = db.getWarningsForWorkshop(in_id);
+            return PartialView(list);
         }
 
         public HomeController() {

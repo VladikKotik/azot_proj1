@@ -7,19 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace azot_proj1
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using azot_proj1.Models;
+    using System.Linq;
+
     public partial class azot_db1Entities : DbContext
     {
         public azot_db1Entities()
             : base("name=azot_db1Entities")
         {
         }
-    
+
+        public List<QueryResultModel> res=new List<QueryResultModel>();
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -27,7 +34,53 @@ namespace azot_proj1
     
         public virtual DbSet<sensor_types> sensor_types { get; set; }
         public virtual DbSet<sensors> sensors { get; set; }
-        public virtual DbSet<warnings> warnings { get; set; }
+        public  DbSet<warnings> warnings { get; set; }
         public virtual DbSet<workshop> workshop { get; set; }
+
+        public List<QueryResultModel> getWarningsForWorkshop(int in_id) {
+
+           
+
+            /*select warn.id,warn.dangerous_value,warn.warning_time,warn.workshop_id,ws.name,s.name 
+	from warnings warn  
+	inner join workshop ws on workshop_id=ws.id
+	inner join sensors s on sensor_id=s.id
+	where warn.workshop_id=1;*/
+
+            /*var result = from warning in this.warnings 
+             join workshop1 in this.workshop on warning.workshop_id equals workshop1.id
+             join sensor in this.sensors on warning.sensor_id equals sensor.id
+             select new
+             { 
+                Name = phone.Name, 
+                Company = company.Name, 
+                Price = phone.Price, 
+                Country = country.Name 
+             };
+            */
+
+            
+
+            IQueryable<warnings> mywarnings = warnings
+                .Include("sensors")
+                .Include("workshop")
+                .Where(c => c.workshop_id == in_id)
+                .Select(c => c);
+
+            foreach (warnings w in mywarnings)
+            {
+                res.Add(new QueryResultModel
+                {
+                    sensor_name = w.sensors.name,
+                    warn_id = w.id,
+                    workshop_name=w.workshop.name,
+                    dangerous_value=w.dangerous_value,
+                    warning_time=w.warning_time
+
+                });
+            }
+            return res;
+        } 
+
     }
 }
