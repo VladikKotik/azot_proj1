@@ -25,6 +25,13 @@ namespace azot_proj1.Controllers
             return PartialView(list);
         }
 
+        public ActionResult SensorsDetails(int in_id)
+        {
+            List<QueryResultModel> list = db.getDataWithSensorValues(in_id);
+            return PartialView(list);
+        }
+
+
         public HomeController() {
              db = new azot_db1Entities();
             

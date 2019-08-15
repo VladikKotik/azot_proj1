@@ -25,7 +25,7 @@ namespace azot_proj1
         {
         }
 
-        public List<QueryResultModel> res=new List<QueryResultModel>();
+        public List<QueryResultModel> res;
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,29 +37,10 @@ namespace azot_proj1
         public  DbSet<warnings> warnings { get; set; }
         public virtual DbSet<workshop> workshop { get; set; }
 
+
         public List<QueryResultModel> getWarningsForWorkshop(int in_id) {
 
-           
-
-            /*select warn.id,warn.dangerous_value,warn.warning_time,warn.workshop_id,ws.name,s.name 
-	from warnings warn  
-	inner join workshop ws on workshop_id=ws.id
-	inner join sensors s on sensor_id=s.id
-	where warn.workshop_id=1;*/
-
-            /*var result = from warning in this.warnings 
-             join workshop1 in this.workshop on warning.workshop_id equals workshop1.id
-             join sensor in this.sensors on warning.sensor_id equals sensor.id
-             select new
-             { 
-                Name = phone.Name, 
-                Company = company.Name, 
-                Price = phone.Price, 
-                Country = country.Name 
-             };
-            */
-
-            
+            res = new List<QueryResultModel>();
 
             IQueryable<warnings> mywarnings = warnings
                 .Include("sensors")
@@ -80,7 +61,39 @@ namespace azot_proj1
                 });
             }
             return res;
-        } 
+        }
+
+        
+
+        public List<QueryResultModel> getDataWithSensorValues(int in_id)
+        {
+
+            res = new List<QueryResultModel>();
+
+            IQueryable<warnings> mywarnings = warnings
+                .Include("sensors")               
+                .Where(c => c.id == in_id)
+                .Select(c => c);
+/*select st.name,s.name,warn.dangerous_value,st.normal_value,warn.warning_time 
+	from  sensors s 
+	inner join warnings warn on warn.sensor_id=s.id
+	inner join sensor_types st on s.sensor_type_id=st.id 
+	where s.id=1;*/
+            foreach (warnings w in mywarnings)
+            {
+                res.Add(new QueryResultModel
+                {
+                    sensor_name = w.sensors.name,
+                    warn_id = w.id,
+                    dangerous_value = w.dangerous_value,
+                    warning_time = w.warning_time,
+                    sensor_type_name=w.sensors.sensor_types.name,
+                    normal_value=w.sensors.sensor_types.normal_value
+
+                });
+            }
+            return res;
+        }
 
     }
 }
