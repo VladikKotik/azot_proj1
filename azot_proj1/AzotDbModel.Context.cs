@@ -7,26 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
 namespace azot_proj1
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using azot_proj1.Models;
     using System.Linq;
-
-    public partial class azot_db1Entities : DbContext
+    using azot_proj1.Models;
+    
+    public partial class azot_db1Entities1 : DbContext
     {
-        public azot_db1Entities()
-            : base("name=azot_db1Entities")
+        public azot_db1Entities1()
+            : base("name=azot_db1Entities1")
         {
         }
-
-        public List<QueryResultModel> res;
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -34,11 +30,13 @@ namespace azot_proj1
     
         public virtual DbSet<sensor_types> sensor_types { get; set; }
         public virtual DbSet<sensors> sensors { get; set; }
-        public  DbSet<warnings> warnings { get; set; }
+        public virtual DbSet<warnings> warnings { get; set; }
         public virtual DbSet<workshop> workshop { get; set; }
+        
+        public List<QueryResultModel> res;
 
-
-        public List<QueryResultModel> getWarningsForWorkshop(int in_id) {
+        public List<QueryResultModel> getWarningsForWorkshop(int in_id)
+        {
 
             res = new List<QueryResultModel>();
 
@@ -54,16 +52,16 @@ namespace azot_proj1
                 {
                     sensor_name = w.sensors.name,
                     warn_id = w.id,
-                    workshop_name=w.workshop.name,
-                    dangerous_value=w.dangerous_value,
-                    warning_time=w.warning_time
+                    workshop_name = w.workshop.name,
+                    dangerous_value = w.dangerous_value,
+                    warning_time = w.getWarningTime()
 
                 });
             }
             return res;
         }
 
-        
+
 
         public List<QueryResultModel> getDataWithSensorValues(int in_id)
         {
@@ -71,7 +69,7 @@ namespace azot_proj1
             res = new List<QueryResultModel>();
 
             IQueryable<warnings> mywarnings = warnings
-                .Include("sensors")               
+                .Include("sensors")
                 .Where(c => c.id == in_id)
                 .Select(c => c);
 
@@ -82,14 +80,119 @@ namespace azot_proj1
                     sensor_name = w.sensors.name,
                     warn_id = w.id,
                     dangerous_value = w.dangerous_value,
-                    warning_time = w.warning_time,
-                    sensor_type_name=w.sensors.sensor_types.name,
-                    normal_value=w.sensors.sensor_types.normal_value
+                    warning_time = w.getWarningTime(),
+                    sensor_type_name = w.sensors.sensor_types.name,
+                    normal_value = w.sensors.sensor_types.normal_value,
+                    warning_time_end = w.getWarningTimeEnd()
 
                 });
             }
             return res;
         }
 
+        public List<QueryResultModel> getWarningsBySensorTypes(int in_workshop_id) {
+            res = new List<QueryResultModel>();
+
+            /*select count(1) as "q warningov",st.name, st.normal_value
+from warnings warn
+join sensors s on warn.sensor_id=s.id
+join sensor_types st on s.sensor_type_id=st.id
+where warn.workshop_id=1
+group by s.sensor_type_id,st.name,st.normal_value;
+             */
+
+            IQueryable<warnings> mywarnings=warnings
+                .Include("sensors")
+                .Where(c=> c.workshop_id==in_workshop_id)
+                .Select(c=> c);
+
+            // mywarnings.GroupBy(c => c.sensors.sensor_type_id);
+
+            /*.Select(group => new { 
+                             Metric = group.Key, 
+                             Count = group.Count() 
+                        })*/
+
+
+            /*foreach(var line in data.GroupBy(info => info.metric)
+                        .Select(group => new { 
+                             Metric = group.Key, 
+                             Count = group.Count() 
+                        })
+                        .OrderBy(x => x.Metric)
+{
+    Console.WriteLine("{0} {1}", line.Metric, line.Count);
+}
+             */
+
+
+            /*var phoneGroups = phones.GroupBy(p => p.Company)
+                        .Select(g => new
+                        { 
+                            Name = g.Key, 
+                            Count = g.Count(), 
+                            Phones = g.Select(p =>p) 
+                        });
+             */
+            foreach (var line in mywarnings.GroupBy(c => c.sensors.sensor_types.name)
+                .Select(group => new {
+                    myKey=group.Key,
+                    myCount=group.Count(),
+                    myWarns=group.Select(c=>c)
+                }))
+            {
+                res.Add(new QueryResultModel
+                {
+                    sensor_type_name = line.myKey,
+                    //normal_value = line.myKey..normal_value,
+                    normal_value="228",
+                    warnings_quantity = line.myCount
+                    });
+
+
+
+                /* foreach (var w in line.myWarns) {
+
+                     res.Add(new QueryResultModel{
+                         sensor_type_name = w.sensors.sensor_types.name,
+                         normal_value = w.sensors.sensor_types.normal_value,
+                         warnings_quantity=
+                     });
+                 }*/
+            }
+
+            foreach (warnings w in mywarnings)
+            {
+               
+            }
+
+            return res;
+
+        }
+
+
+
+        public List<QueryResultModel> getDetailedWarnings(int in_workshop_id) {
+
+            res = new List<QueryResultModel>();
+
+            IQueryable<warnings> mywarnings = warnings
+                .Include("sensors")
+                .Where(c => c.workshop_id == in_workshop_id)
+                .Select(c => c);
+
+            foreach (warnings w in mywarnings)
+            {
+                res.Add(new QueryResultModel
+                {
+                    sensor_name = w.sensors.name,
+                    dangerous_value = w.dangerous_value,
+                    warning_time = w.getWarningTime(),
+                    warning_time_end = w.getWarningTimeEnd()
+
+                });
+            }
+            return res;
+        }
     }
 }

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="azot_db1Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="warnings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dangerous_value" Type="varchar" MaxLength="255" />
+          <Property Name="warning_time" Type="datetime" />
+          <Property Name="sensor_id" Type="int" />
+          <Property Name="workshop_id" Type="int" />
+          <Property Name="warning_time_end" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="azot_db1Model1StoreContainer">
+          <EntitySet Name="warnings" EntityType="Self.warnings" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="azot_db1Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="warnings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dangerous_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="warning_time" Type="DateTime" Precision="3" />
+          <Property Name="sensor_id" Type="Int32" />
+          <Property Name="workshop_id" Type="Int32" />
+          <Property Name="warning_time_end" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="azot_db1Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="warnings" EntityType="Self.warnings" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="azot_db1Model1StoreContainer" CdmEntityContainer="azot_db1Entities1">
+          <EntitySetMapping Name="warnings">
+            <EntityTypeMapping TypeName="azot_db1Model1.warnings">
+              <MappingFragment StoreEntitySet="warnings">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dangerous_value" ColumnName="dangerous_value" />
+                <ScalarProperty Name="warning_time" ColumnName="warning_time" />
+                <ScalarProperty Name="sensor_id" ColumnName="sensor_id" />
+                <ScalarProperty Name="workshop_id" ColumnName="workshop_id" />
+                <ScalarProperty Name="warning_time_end" ColumnName="warning_time_end" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

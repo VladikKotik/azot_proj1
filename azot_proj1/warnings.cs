@@ -16,12 +16,36 @@ namespace azot_proj1
     {
         public int id { get; set; }
         public string dangerous_value { get; set; }
-        public System.DateTime warning_time { get; set; }
+        public Nullable<System.DateTime> warning_time { get; set; }
         public Nullable<int> sensor_id { get; set; }
         public Nullable<int> workshop_id { get; set; }
+        public Nullable<System.DateTime> warning_time_end { get; set; }
     
         public virtual sensors sensors { get; set; }
         public virtual workshop workshop { get; set; }
-        
+
+        public string getWarningTime()
+        {
+            string res;
+            if (warning_time != null)
+            {
+                res = warning_time.ToString();
+            }
+            else { res = ""; }
+            return res;
+
+        }
+
+        public string getWarningTimeEnd()
+        {
+            string res;
+            if (warning_time_end != null)
+            {
+                res = warning_time_end.ToString();
+            }
+            else { res = ""; }
+            return res;
+
+        }
     }
 }

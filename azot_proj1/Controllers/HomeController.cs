@@ -11,7 +11,7 @@ namespace azot_proj1.Controllers
     public class HomeController : Controller
     {
 
-        public azot_db1Entities db;
+        public azot_db1Entities1 db;
         
         public ActionResult Index()
         {
@@ -33,8 +33,13 @@ namespace azot_proj1.Controllers
 
 
         public HomeController() {
-             db = new azot_db1Entities();
+             db = new azot_db1Entities1();
             
+        }
+
+        public ActionResult getFirstTable() {
+            List<QueryResultModel> list = db.getWarningsBySensorTypes(1);
+            return View("FirstTable", list);
         }
     }
 }

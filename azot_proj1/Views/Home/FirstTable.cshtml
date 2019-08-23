@@ -8,22 +8,19 @@
             <th>id нарушения</th>
             <th>Название типа датчика</th>
             <th>Допустимое значение</th>
-            <th>Датчик</th>
-            <th>Зафиксированное значение</th>
-            <th>Время нарушения</th>
+            <th>кол-во</th>
             
         </tr>
+        
         @foreach (azot_proj1.Models.QueryResultModel d in Model)
     {
         <tr>
-            <td> @d.warn_id</td>
+            <td>1</td>
             <td>  @d.sensor_type_name</td>
             <td>@d.normal_value</td>
 
-            <td>@d.sensor_name</td>
-            <td>@d.dangerous_value</td>
-            <td>@d.warning_time</td>
-            <td>@d.warning_time_end</td>
+            <td>@d.warnings_quantity</td>
+            
         </tr>}
 
     </table>

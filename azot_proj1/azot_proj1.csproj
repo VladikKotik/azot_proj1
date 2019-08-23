@@ -190,6 +190,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\WarningsOfWorkshop.cshtml" />
     <Content Include="Views\Home\SensorsDetails.cshtml" />
+    <Content Include="Views\Home\FirstTable.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

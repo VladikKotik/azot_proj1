@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="azot_db1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="azot_db1Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sensor_types">
           <Key>
             <PropertyRef Name="id" />
@@ -88,7 +88,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="azot_db1ModelStoreContainer">
+        <EntityContainer Name="azot_db1Model1StoreContainer">
           <EntitySet Name="sensor_types" EntityType="Self.sensor_types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sensors" EntityType="Self.sensors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="warnings" EntityType="Self.warnings" Schema="dbo" store:Type="Tables" />
@@ -114,7 +114,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="azot_db1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="azot_db1Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="sensor_types">
           <Key>
             <PropertyRef Name="id" />
@@ -233,9 +233,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="azot_db1ModelStoreContainer" CdmEntityContainer="azot_db1Entities1">
+        <EntityContainerMapping StorageEntityContainer="azot_db1Model1StoreContainer" CdmEntityContainer="azot_db1Entities1">
           <EntitySetMapping Name="sensor_types">
-            <EntityTypeMapping TypeName="azot_db1Model.sensor_types">
+            <EntityTypeMapping TypeName="azot_db1Model1.sensor_types">
               <MappingFragment StoreEntitySet="sensor_types">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -244,7 +244,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sensors">
-            <EntityTypeMapping TypeName="azot_db1Model.sensors">
+            <EntityTypeMapping TypeName="azot_db1Model1.sensors">
               <MappingFragment StoreEntitySet="sensors">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -254,7 +254,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="warnings">
-            <EntityTypeMapping TypeName="azot_db1Model.warnings">
+            <EntityTypeMapping TypeName="azot_db1Model1.warnings">
               <MappingFragment StoreEntitySet="warnings">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="dangerous_value" ColumnName="dangerous_value" />
@@ -266,7 +266,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="workshop">
-            <EntityTypeMapping TypeName="azot_db1Model.workshop">
+            <EntityTypeMapping TypeName="azot_db1Model1.workshop">
               <MappingFragment StoreEntitySet="workshop">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
