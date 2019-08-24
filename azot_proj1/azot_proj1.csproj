@@ -164,6 +164,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\QueryResultModel.cs" />
+    <Compile Include="Models\WorkshopsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sensors.cs">
       <DependentUpon>AzotDbModel.tt</DependentUpon>
@@ -191,6 +192,8 @@
     <Content Include="Views\Home\WarningsOfWorkshop.cshtml" />
     <Content Include="Views\Home\SensorsDetails.cshtml" />
     <Content Include="Views\Home\FirstTable.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\detalizationView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

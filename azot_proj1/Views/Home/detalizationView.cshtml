@@ -1,0 +1,69 @@
+﻿@model azot_proj1.Models.WorkshopsViewModel
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+
+        @using System.Web.Optimization
+        @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+        @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+        <table>
+            <tr>
+                <td><h3>Параметры</h3></td>
+                <td><h3>Нарушения</h3></td>
+
+            </tr>
+            <tr>
+                <td><div id="first_table"></div></td>
+                <td>отступ</td>
+                <td><div id="second_table"></div></td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.selectedWorkshopId)
+                    @Html.DropDownListFor(m => m.selectedWorkshopId, Model.workshops, new { @class = "form-control", @id = "ddlist" })
+                </td>
+                <td>
+                    <p style="display: none"> @Ajax.ActionLink(linkText: "info", actionName: "getFirstTable", routeValues: new { in_id = "ws_id" }, ajaxOptions: new AjaxOptions { UpdateTargetId = "first_table" },htmlAttributes: new { @id = "anchorclick", @class = "ddlSubmit" }) </p>
+                </td>
+                <td>
+                    <button id="refresh_button"> refresh</button>
+                </td>
+            </tr>
+
+
+        </table>
+
+      
+        <script>
+            document.getElementById('ddlist').onchange = function(){
+                var path = document.getElementById('anchorclick').href;
+                path = path.replace("ws_id", document.getElementById('ddlist').value);
+                document.getElementById("anchorclick").href = path;
+                document.getElementById('anchorclick').click();
+            };
+
+            document.getElementById('refresh_button').onclick = function () {
+                var path = document.getElementById('anchorclick').href;
+                path = path.replace("ws_id", document.getElementById('ddlist').value);
+                document.getElementById("anchorclick").href = path;
+                document.getElementById('anchorclick').click();
+            };
+       </script>
+
+    </div>
+</body>
+</html>

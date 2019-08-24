@@ -93,72 +93,25 @@ namespace azot_proj1
         public List<QueryResultModel> getWarningsBySensorTypes(int in_workshop_id) {
             res = new List<QueryResultModel>();
 
-            /*select count(1) as "q warningov",st.name, st.normal_value
-from warnings warn
-join sensors s on warn.sensor_id=s.id
-join sensor_types st on s.sensor_type_id=st.id
-where warn.workshop_id=1
-group by s.sensor_type_id,st.name,st.normal_value;
-             */
-
             IQueryable<warnings> mywarnings=warnings
                 .Include("sensors")
                 .Where(c=> c.workshop_id==in_workshop_id)
                 .Select(c=> c);
 
-            // mywarnings.GroupBy(c => c.sensors.sensor_type_id);
-
-            /*.Select(group => new { 
-                             Metric = group.Key, 
-                             Count = group.Count() 
-                        })*/
-
-
-            /*foreach(var line in data.GroupBy(info => info.metric)
-                        .Select(group => new { 
-                             Metric = group.Key, 
-                             Count = group.Count() 
-                        })
-                        .OrderBy(x => x.Metric)
-{
-    Console.WriteLine("{0} {1}", line.Metric, line.Count);
-}
-             */
-
-
-            /*var phoneGroups = phones.GroupBy(p => p.Company)
-                        .Select(g => new
-                        { 
-                            Name = g.Key, 
-                            Count = g.Count(), 
-                            Phones = g.Select(p =>p) 
-                        });
-             */
-            foreach (var line in mywarnings.GroupBy(c => c.sensors.sensor_types.name)
+         
+            foreach (var line in mywarnings.GroupBy(c => c.sensors.sensor_types)
                 .Select(group => new {
                     myKey=group.Key,
-                    myCount=group.Count(),
-                    myWarns=group.Select(c=>c)
+                    myCount=group.Count()
                 }))
             {
                 res.Add(new QueryResultModel
                 {
-                    sensor_type_name = line.myKey,
-                    //normal_value = line.myKey..normal_value,
-                    normal_value="228",
+                    sensor_type_name = line.myKey.name,
+                    normal_value=line.myKey.normal_value,
                     warnings_quantity = line.myCount
                     });
 
-
-
-                /* foreach (var w in line.myWarns) {
-
-                     res.Add(new QueryResultModel{
-                         sensor_type_name = w.sensors.sensor_types.name,
-                         normal_value = w.sensors.sensor_types.normal_value,
-                         warnings_quantity=
-                     });
-                 }*/
             }
 
             foreach (warnings w in mywarnings)

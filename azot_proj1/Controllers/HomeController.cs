@@ -12,8 +12,13 @@ namespace azot_proj1.Controllers
     {
 
         public azot_db1Entities1 db;
-        
-        public ActionResult Index()
+
+
+        public ActionResult Index() {
+            return View(db);
+        }
+
+        public ActionResult OldIndex()
         {
             return View("indexView",db);
         }
@@ -37,9 +42,37 @@ namespace azot_proj1.Controllers
             
         }
 
-        public ActionResult getFirstTable() {
-            List<QueryResultModel> list = db.getWarningsBySensorTypes(1);
-            return View("FirstTable", list);
+        //><a href="/home/getFirstTable?in_id=@w.id"  пусть тут бует это шоб вызывать метод в новом окне и с аргументом
+
+        public ActionResult getFirstTable(int in_id) {
+            //in_id - workshop id
+            List<QueryResultModel> list = db.getWarningsBySensorTypes(in_id);
+            return PartialView("FirstTable", list);
+        }
+
+        public IEnumerable<SelectListItem> GetMyObjects()
+        {
+            var myobjects = db.workshop.ToList().Select(x => new SelectListItem
+            {
+                Value = x.id.ToString(),
+                Text = x.name
+
+            });
+
+            return new SelectList(myobjects, "Value", "Text");
+        }
+
+        public ActionResult Detalization()
+        {
+
+            var model = new WorkshopsViewModel
+            {
+                workshops = GetMyObjects()
+            };
+
+            return View("detalizationView", model);
+
+
         }
     }
 }

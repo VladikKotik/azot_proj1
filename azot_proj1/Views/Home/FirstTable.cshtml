@@ -5,25 +5,24 @@
 <div>
     <table border="1" align="left">
         <tr>
-            <th>id нарушения</th>
+            <th>N</th>
             <th>Название типа датчика</th>
             <th>Допустимое значение</th>
             <th>кол-во</th>
-            
-        </tr>
-        
-        @foreach (azot_proj1.Models.QueryResultModel d in Model)
-    {
-        <tr>
-            <td>1</td>
-            <td>  @d.sensor_type_name</td>
-            <td>@d.normal_value</td>
 
-            <td>@d.warnings_quantity</td>
-            
-        </tr>}
+        </tr>
+
+        @foreach (azot_proj1.Models.QueryResultModel d in Model)
+        {
+            <tr>
+                <td>1</td>
+                <td>  @d.sensor_type_name</td>
+                <td>@d.normal_value</td>
+
+                <td>@d.warnings_quantity</td>
+
+            </tr>}
 
     </table>
 </div>
-
 

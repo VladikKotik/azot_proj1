@@ -1,0 +1,40 @@
+﻿@using azot_proj1
+@model azot_db1Entities1
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body> 
+    <div>
+
+
+        <table border="1">
+            <tr>
+                <th>id цеха</th>
+                <th>Название цеха</th>
+                <th>подробнее</th>
+            </tr>
+                @foreach (azot_proj1.workshop w in Model.workshop.ToList())
+        {
+
+        <tr>
+            <td> @w.id</td>
+            <td>  @w.name</td>
+            <td><a href="/home/Detalization" onclick="window.open(this.href, '', 'scrollbars=1,resizable=yes,height='+Math.min(500, screen.availHeight)+',width='+Math.min(500, screen.availWidth)); return false;">детаилзцая</a></td>
+        </tr>
+ }
+
+            </table>
+
+    </div>
+</body>
+</html>
