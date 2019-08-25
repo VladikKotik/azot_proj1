@@ -37,28 +37,27 @@
                     @Html.DropDownListFor(m => m.selectedWorkshopId, Model.workshops, new { @class = "form-control", @id = "ddlist" })
                 </td>
                 <td>
-                    <p style="display: none"> @Ajax.ActionLink(linkText: "info", actionName: "getFirstTable", routeValues: new { in_id = "ws_id" }, ajaxOptions: new AjaxOptions { UpdateTargetId = "first_table" },htmlAttributes: new { @id = "anchorclick", @class = "ddlSubmit" }) </p>
+                  
+                    <p style="display: none"> @Ajax.ActionLink(linkText: "info", actionName: "getFirstTable", routeValues: new { in_id = "ws_id" }, ajaxOptions: new AjaxOptions { UpdateTargetId = "first_table" }, htmlAttributes: new { @id = "anchorclick", @class = "ddlSubmit" }) </p>
                 </td>
                 <td>
                     <button id="refresh_button"> refresh</button>
                 </td>
             </tr>
-
-
-        </table>
-
-      
+        </table>     
         <script>
+            var gc = true;
             document.getElementById('ddlist').onchange = function(){
                 var path = document.getElementById('anchorclick').href;
-                path = path.replace("ws_id", document.getElementById('ddlist').value);
+                path = path.split("=")[0] + "="+document.getElementById('ddlist').value;
                 document.getElementById("anchorclick").href = path;
                 document.getElementById('anchorclick').click();
+                
             };
 
             document.getElementById('refresh_button').onclick = function () {
                 var path = document.getElementById('anchorclick').href;
-                path = path.replace("ws_id", document.getElementById('ddlist').value);
+                path = path.split("=")[0] + "=" + document.getElementById('ddlist').value;
                 document.getElementById("anchorclick").href = path;
                 document.getElementById('anchorclick').click();
             };

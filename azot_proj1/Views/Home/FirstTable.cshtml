@@ -3,25 +3,29 @@
 
 
 <div>
+    @using System.Web.Optimization
+    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
     <table border="1" align="left">
         <tr>
             <th>N</th>
             <th>Название типа датчика</th>
             <th>Допустимое значение</th>
             <th>кол-во</th>
-
+            <th>подробнее</th>
         </tr>
 
         @foreach (azot_proj1.Models.QueryResultModel d in Model)
         {
-            <tr>
-                <td>1</td>
-                <td>  @d.sensor_type_name</td>
-                <td>@d.normal_value</td>
+        <tr>
+            <td>1</td>
+            <td>  @d.sensor_type_name</td>
+            <td>@d.normal_value</td>
 
-                <td>@d.warnings_quantity</td>
+            <td>@d.warnings_quantity</td>
+            <td>@Ajax.ActionLink(linkText: "more", actionName: "DetailedWarningsOfWorkshop", routeValues: new { in_id = d.workshop_id }, ajaxOptions: new AjaxOptions { UpdateTargetId = "second_table" })</td>
 
-            </tr>}
+        </tr>}
 
     </table>
 </div>

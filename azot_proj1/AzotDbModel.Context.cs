@@ -103,13 +103,15 @@ namespace azot_proj1
                 .Select(group => new {
                     myKey=group.Key,
                     myCount=group.Count()
+                  
                 }))
             {
                 res.Add(new QueryResultModel
                 {
                     sensor_type_name = line.myKey.name,
                     normal_value=line.myKey.normal_value,
-                    warnings_quantity = line.myCount
+                    warnings_quantity = line.myCount,
+                    workshop_id=in_workshop_id
                     });
 
             }
@@ -128,6 +130,8 @@ namespace azot_proj1
         public List<QueryResultModel> getDetailedWarnings(int in_workshop_id) {
 
             res = new List<QueryResultModel>();
+
+            //и еще тут или в другом месте по типу датчиков фильтровать
 
             IQueryable<warnings> mywarnings = warnings
                 .Include("sensors")

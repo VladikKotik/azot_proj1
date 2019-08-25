@@ -71,8 +71,12 @@ namespace azot_proj1.Controllers
             };
 
             return View("detalizationView", model);
+            
+        }
 
-
+        public ActionResult DetailedWarningsOfWorkshop(int in_id) {
+            List<QueryResultModel> list = db.getDetailedWarnings(in_id);
+            return PartialView("DetailedWarningsOfWorkshop", list);
         }
     }
 }
