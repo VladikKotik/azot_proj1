@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width" />
     <title></title>
 </head>
-<body>
+<body bgcolor="silver">
     <div>
 
         @using System.Web.Optimization
@@ -26,7 +26,7 @@
 
             </tr>
             <tr>
-                <td><div id="first_table"></div></td>
+                <td><div id="first_table" ></div></td>
                 <td>отступ</td>
                 <td><div id="second_table"></div></td>
             </tr>
@@ -52,6 +52,10 @@
                 path = path.split("=")[0] + "="+document.getElementById('ddlist').value;
                 document.getElementById("anchorclick").href = path;
                 document.getElementById('anchorclick').click();
+                const myNode = document.getElementById("second_table");
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.firstChild);
+                }
                 
             };
 
@@ -60,8 +64,21 @@
                 path = path.split("=")[0] + "=" + document.getElementById('ddlist').value;
                 document.getElementById("anchorclick").href = path;
                 document.getElementById('anchorclick').click();
+                const myNode = document.getElementById("second_table");
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.firstChild);
+                }
             };
        </script>
+
+        <style>
+            #first_table {
+                min-height: 300px;
+            }
+            #second_table {
+                min-height: 300px;
+            }
+        </style>
 
     </div>
 </body>

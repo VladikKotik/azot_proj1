@@ -50,28 +50,26 @@ namespace azot_proj1.Controllers
             return PartialView("FirstTable", list);
         }
 
-        public IEnumerable<SelectListItem> GetMyObjects()
+        public IEnumerable<SelectListItem> GetMyObjects(int in_ws_id)
         {
             var myobjects = db.workshop.ToList().Select(x => new SelectListItem
             {
                 Value = x.id.ToString(),
-                Text = x.name
-
+                Text = x.name,
+                //хуйня пока. ну кароч выбрать цех нужный, по айдишнику и во вьюхе переделать шоб ызывала с аргументом!!
+                //Selected = x.id == in_ws_id ? true : false
             });
-
+            
             return new SelectList(myobjects, "Value", "Text");
         }
 
-        public ActionResult Detalization()
+        public ActionResult Detalization(int in_ws_id)
         {
-
             var model = new WorkshopsViewModel
             {
-                workshops = GetMyObjects()
+                workshops = GetMyObjects(in_ws_id)
             };
-
             return View("detalizationView", model);
-            
         }
 
         public ActionResult DetailedWarningsOfWorkshop(int in_id) {
