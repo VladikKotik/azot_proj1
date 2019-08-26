@@ -21,13 +21,14 @@
 
         <table>
             <tr>
-                <td><h3>Параметры</h3></td>
-                <td><h3>Нарушения</h3></td>
+                <td><h3 align="center">Параметры</h3></td>
+                <td></td>
+                <td><h3 align="center">Нарушения</h3></td>
 
             </tr>
             <tr>
                 <td><div id="first_table"></div></td>
-                <td>отступ</td>
+                <td width="100px"></td>
                 <td><div id="second_table"></div></td>
             </tr>
 
@@ -37,7 +38,7 @@
                     @Html.DropDownListFor(m => m.selectedWorkshopId, Model.workshops, new { @class = "form-control", @id = "ddlist" })
                 </td>
                 <td>
-                    <button id="refresh_button"> refresh</button>
+                    <button id="refresh_button"> обновить</button>
 
                     <p style="display: none"> @Ajax.ActionLink(linkText: "info", actionName: "getFirstTable", routeValues: new { in_id = "ws_id" }, ajaxOptions: new AjaxOptions { UpdateTargetId = "first_table" }, htmlAttributes: new { @id = "anchorclick", @class = "ddlSubmit" }) </p>
                 </td>
@@ -47,9 +48,9 @@
 
 
                     <input id="filter_radio" name="color" type="radio" value="" onclick="othershowdetails()" />
-                    <span>filter</span> <br />
+                    <span>фильтрация</span> <br />
                     <input checked="checked" id="videlenie_radio" name="color" type="radio" value="" onclick="othershowdetails()" />
-                    <span>videlenie</span>
+                    <span>выделение</span>
                 </td>
             </tr>
         </table>

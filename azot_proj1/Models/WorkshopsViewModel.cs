@@ -10,7 +10,7 @@ namespace azot_proj1.Models
     public class WorkshopsViewModel
     {
 
-            [Display(Name = "Workshop")]
+            [Display(Name = "Выбор цеха")]
             public int selectedWorkshopId { get; set; }
             public IEnumerable<SelectListItem> workshops { get; set; }
 
