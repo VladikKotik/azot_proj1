@@ -11,13 +11,17 @@
             <th>Зафиксированное значение</th>
         </tr>
         @foreach (azot_proj1.Models.QueryResultModel d in Model)
-    {
+        {
+            if (d.sensor_type_id == ViewBag.st_id)
+            {
+
         <tr>
             <td> @d.sensor_name</td>
             <td>@d.warning_time</td>
             <td>@d.warning_time_end</td>
             <td>@d.dangerous_value</td>
         </tr>}
+        }
 
     </table>
 </div>

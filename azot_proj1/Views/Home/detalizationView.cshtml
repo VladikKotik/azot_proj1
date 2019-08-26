@@ -26,7 +26,7 @@
 
             </tr>
             <tr>
-                <td><div id="first_table" ></div></td>
+                <td><div id="first_table"></div></td>
                 <td>отступ</td>
                 <td><div id="second_table"></div></td>
             </tr>
@@ -37,26 +37,37 @@
                     @Html.DropDownListFor(m => m.selectedWorkshopId, Model.workshops, new { @class = "form-control", @id = "ddlist" })
                 </td>
                 <td>
-                  
+                    <button id="refresh_button"> refresh</button>
+
                     <p style="display: none"> @Ajax.ActionLink(linkText: "info", actionName: "getFirstTable", routeValues: new { in_id = "ws_id" }, ajaxOptions: new AjaxOptions { UpdateTargetId = "first_table" }, htmlAttributes: new { @id = "anchorclick", @class = "ddlSubmit" }) </p>
                 </td>
                 <td>
-                    <button id="refresh_button"> refresh</button>
+                    <input id="ws_id" style="display: none" />
+                    <input id="st_id" style="display: none" />
+
+
+                    <input id="filter_radio" name="color" type="radio" value="" onclick="othershowdetails()" />
+                    <span>filter</span> <br />
+                    <input checked="checked" id="videlenie_radio" name="color" type="radio" value="" onclick="othershowdetails()" />
+                    <span>videlenie</span>
                 </td>
             </tr>
-        </table>     
+        </table>
+
+        <p style="display: none"> @Ajax.ActionLink(linkText: "info", actionName: "DetailedWarningsOfWorkshop", routeValues: new { ws_id = "in_id",st_id="st_id" ,viewtype = "ws" }, ajaxOptions: new AjaxOptions { UpdateTargetId = "second_table" }, htmlAttributes: new { @id = "detailclick", @class = "mysubmit" }) </p>
+
         <script>
             var gc = true;
-            document.getElementById('ddlist').onchange = function(){
+            document.getElementById('ddlist').onchange = function () {
                 var path = document.getElementById('anchorclick').href;
-                path = path.split("=")[0] + "="+document.getElementById('ddlist').value;
+                path = path.split("=")[0] + "=" + document.getElementById('ddlist').value;
                 document.getElementById("anchorclick").href = path;
                 document.getElementById('anchorclick').click();
                 const myNode = document.getElementById("second_table");
                 while (myNode.firstChild) {
                     myNode.removeChild(myNode.firstChild);
                 }
-                
+
             };
 
             document.getElementById('refresh_button').onclick = function () {
@@ -69,12 +80,51 @@
                     myNode.removeChild(myNode.firstChild);
                 }
             };
-       </script>
+
+            function showdetails(ws_id,st_id) {
+                var path = document.getElementById('detailclick').href;
+
+                //filter 1 ; videlenie 2;
+                document.getElementById("ws_id").value = ws_id;
+                document.getElementById("st_id").value = st_id;
+
+                if (document.getElementById("filter_radio").checked) {
+                    //alert(1);
+                    path = path.split("=")[0] + "=" + ws_id + "&st_id=" + st_id + "&viewtype=1";
+                }
+                if (document.getElementById("videlenie_radio").checked) {
+                    path = path.split("=")[0] + "=" + ws_id + "&st_id=" + st_id + "&viewtype=2";
+                }
+                document.getElementById("detailclick").href = path;
+                document.getElementById('detailclick').click();
+            }
+
+            function othershowdetails() {
+                var path = document.getElementById('detailclick').href;
+
+                //filter 1 ; videlenie 2;
+                ws_id = document.getElementById("ws_id").value;
+                st_id = document.getElementById("st_id").value;
+
+
+                if (document.getElementById("filter_radio").checked) {
+                    //alert(1);
+                    path = path.split("=")[0] + "=" + ws_id + "&st_id=" + st_id + "&viewtype=1";
+                }
+                if (document.getElementById("videlenie_radio").checked) {
+                    path = path.split("=")[0] + "=" + ws_id + "&st_id=" + st_id + "&viewtype=2";
+                }
+                document.getElementById("detailclick").href = path;
+                document.getElementById('detailclick').click();
+            }
+
+        </script>
 
         <style>
             #first_table {
                 min-height: 300px;
             }
+
             #second_table {
                 min-height: 300px;
             }

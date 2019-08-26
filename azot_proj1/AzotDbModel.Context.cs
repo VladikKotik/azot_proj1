@@ -111,8 +111,10 @@ namespace azot_proj1
                     sensor_type_name = line.myKey.name,
                     normal_value=line.myKey.normal_value,
                     warnings_quantity = line.myCount,
-                    workshop_id=in_workshop_id
-                    });
+                    workshop_id=in_workshop_id,
+                    sensor_type_id = line.myKey.id
+
+                });
 
             }
 
@@ -145,7 +147,8 @@ namespace azot_proj1
                     sensor_name = w.sensors.name,
                     dangerous_value = w.dangerous_value,
                     warning_time = w.getWarningTime(),
-                    warning_time_end = w.getWarningTimeEnd()
+                    warning_time_end = w.getWarningTimeEnd(),
+                    sensor_type_id=w.sensors.sensor_type_id
 
                 });
             }

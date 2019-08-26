@@ -1,0 +1,38 @@
+﻿@using azot_proj1.Models
+@model List<QueryResultModel>
+
+
+<div>
+    <table border="1" align="left" bgcolor="white">
+        <tr>
+            <th>Датчик</th>
+            <th>Время нарушения</th>
+            <th>Время окончания нарушения</th>
+            <th>Зафиксированное значение</th>
+        </tr>
+        @foreach (azot_proj1.Models.QueryResultModel d in Model)
+    {
+        if (d.sensor_type_id == ViewBag.st_id)
+        {
+            <tr bgcolor="#cc9900">
+                <td> @d.sensor_name</td>
+                <td>@d.warning_time</td>
+                <td>@d.warning_time_end</td>
+                <td>@d.dangerous_value</td>
+            </tr>
+    }
+    else
+    {
+        <tr >
+            <td> @d.sensor_name</td>
+            <td>@d.warning_time</td>
+            <td>@d.warning_time_end</td>
+            <td>@d.dangerous_value</td>
+        </tr>
+}
+}
+
+    </table>
+</div>
+
+

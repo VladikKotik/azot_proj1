@@ -23,7 +23,7 @@
             <td>@d.normal_value</td>
 
             <td>@d.warnings_quantity</td>
-            <td>@Ajax.ActionLink(linkText: "more", actionName: "DetailedWarningsOfWorkshop", routeValues: new { in_id = d.workshop_id }, ajaxOptions: new AjaxOptions { UpdateTargetId = "second_table" })</td>
+            <td><button id="detail_button" onclick="showdetails(@d.workshop_id,@d.sensor_type_id)">details</button></td>
 
         </tr>}
 

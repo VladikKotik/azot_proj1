@@ -19,6 +19,7 @@ namespace azot_proj1.Models
         public string warning_time_end { get; set; }
         public int warnings_quantity { get; set; }
         public int workshop_id { get; set; }
+        public int sensor_type_id{get; set;}
 
 
     }

@@ -22,7 +22,7 @@ namespace azot_proj1
     
         public int id { get; set; }
         public string name { get; set; }
-        public Nullable<int> sensor_type_id { get; set; }
+        public int sensor_type_id { get; set; }
         public Nullable<int> workshop_id { get; set; }
     
         public virtual sensor_types sensor_types { get; set; }
