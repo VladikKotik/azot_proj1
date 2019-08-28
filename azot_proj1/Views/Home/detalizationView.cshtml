@@ -58,7 +58,7 @@
         <p style="display: none"> @Ajax.ActionLink(linkText: "info", actionName: "DetailedWarningsOfWorkshop", routeValues: new { ws_id = "in_id",st_id="st_id" ,viewtype = "ws" }, ajaxOptions: new AjaxOptions { UpdateTargetId = "second_table" }, htmlAttributes: new { @id = "detailclick", @class = "mysubmit" }) </p>
 
         <script>
-            var gc = true;
+            //var gc = true;
             document.getElementById('ddlist').onchange = function () {
                 var path = document.getElementById('anchorclick').href;
                 path = path.split("=")[0] + "=" + document.getElementById('ddlist').value;
@@ -68,7 +68,7 @@
                 while (myNode.firstChild) {
                     myNode.removeChild(myNode.firstChild);
                 }
-
+                showdetails(document.getElementById('ddlist').value, 0,0);
             };
 
             document.getElementById('refresh_button').onclick = function () {
@@ -80,6 +80,8 @@
                 while (myNode.firstChild) {
                     myNode.removeChild(myNode.firstChild);
                 }
+                showdetails(document.getElementById('ddlist').value, 0, 0);
+
             };
 
             function showdetails(ws_id,st_id) {
@@ -126,9 +128,7 @@
                 min-height: 300px;
             }
 
-            #second_table {
-                min-height: 300px;
-            }
+           
         </style>
 
     </div>

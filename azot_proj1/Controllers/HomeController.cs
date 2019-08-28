@@ -80,9 +80,14 @@ namespace azot_proj1.Controllers
                 ViewBag.st_id = st_id;
                 return PartialView("FilteredDetailedWarningsOfWorkshop", list);
             }
-            else {
+            else if (viewtype == 2)
+            {
                 ViewBag.st_id = st_id;
                 return PartialView("HighlightedDetailedWarningsOfWorkshop", list);
+            }
+            else {
+                return PartialView("DetailedWarningsOfWorkshop", list);
+
             }
             //return PartialView("DetailedWarningsOfWorkshop", list);
         }

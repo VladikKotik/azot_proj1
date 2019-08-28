@@ -138,6 +138,7 @@ namespace azot_proj1
             IQueryable<warnings> mywarnings = warnings
                 .Include("sensors")
                 .Where(c => c.workshop_id == in_workshop_id)
+                .OrderBy(c=>c.sensors.sensor_type_id)
                 .Select(c => c);
 
             foreach (warnings w in mywarnings)

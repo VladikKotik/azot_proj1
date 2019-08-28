@@ -196,6 +196,7 @@
     <Content Include="Views\Home\detalizationView.cshtml" />
     <Content Include="Views\Home\HighlightedDetailedWarningsOfWorkshop.cshtml" />
     <Content Include="Views\Home\FilteredDetailedWarningsOfWorkshop.cshtml" />
+    <Content Include="Views\Home\DetailedWarningsOfWorkshop.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
