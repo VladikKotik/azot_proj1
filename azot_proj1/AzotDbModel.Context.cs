@@ -35,62 +35,8 @@ namespace azot_proj1
         
         public List<QueryResultModel> res;
 
-        public List<QueryResultModel> getWarningsForWorkshop(int in_id)
-        {
 
-            res = new List<QueryResultModel>();
-
-            IQueryable<warnings> mywarnings = warnings
-                .Include("sensors")
-                .Include("workshop")
-                .Where(c => c.workshop_id == in_id)
-                .Select(c => c);
-
-            foreach (warnings w in mywarnings)
-            {
-                res.Add(new QueryResultModel
-                {
-                    sensor_name = w.sensors.name,
-                    warn_id = w.id,
-                    workshop_name = w.workshop.name,
-                    dangerous_value = w.dangerous_value,
-                    warning_time = w.getWarningTime()
-
-                });
-            }
-            return res;
-        }
-
-
-
-        public List<QueryResultModel> getDataWithSensorValues(int in_id)
-        {
-
-            res = new List<QueryResultModel>();
-
-            IQueryable<warnings> mywarnings = warnings
-                .Include("sensors")
-                .Where(c => c.id == in_id)
-                .Select(c => c);
-
-            foreach (warnings w in mywarnings)
-            {
-                res.Add(new QueryResultModel
-                {
-                    sensor_name = w.sensors.name,
-                    warn_id = w.id,
-                    dangerous_value = w.dangerous_value,
-                    warning_time = w.getWarningTime(),
-                    sensor_type_name = w.sensors.sensor_types.name,
-                    normal_value = w.sensors.sensor_types.normal_value,
-                    warning_time_end = w.getWarningTimeEnd()
-
-                });
-            }
-            return res;
-        }
-
-        public List<QueryResultModel> getWarningsBySensorTypes(int in_workshop_id) {
+        public List<QueryResultModel> getWarningsBySensorTypes(int in_workshop_id) { //возвращает данные по нарушениям по типу датчиков(считает кол-во нарушений для типа датчика)
             res = new List<QueryResultModel>();
 
             IQueryable<warnings> mywarnings=warnings
@@ -117,23 +63,15 @@ namespace azot_proj1
                 });
 
             }
-
-            foreach (warnings w in mywarnings)
-            {
-               
-            }
-
             return res;
 
         }
 
 
 
-        public List<QueryResultModel> getDetailedWarnings(int in_workshop_id) {
+        public List<QueryResultModel> getDetailedWarnings(int in_workshop_id) {//возвращает более подробные данные про все нарушения для цеха (2я таблица)
 
             res = new List<QueryResultModel>();
-
-            //и еще тут или в другом месте по типу датчиков фильтровать
 
             IQueryable<warnings> mywarnings = warnings
                 .Include("sensors")

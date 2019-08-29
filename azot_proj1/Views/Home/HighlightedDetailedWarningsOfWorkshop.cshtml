@@ -3,7 +3,7 @@
 
 
 <div>
-    <table border="1" align="left" bgcolor="white">
+    <table border="1" align="left" bgcolor="white" class="second_table">
         <tr>
             <th>Датчик</th>
             <th>Время нарушения</th>
@@ -11,26 +11,32 @@
             <th>Зафиксированное значение</th>
         </tr>
         @foreach (azot_proj1.Models.QueryResultModel d in Model)
-    {
-        if (d.sensor_type_id == ViewBag.st_id)
         {
-            <tr bgcolor="#cc9900">
+            if (d.sensor_type_id == ViewBag.st_id)
+            {
+            <tr bgcolor="#ffcc66">
                 <td> @d.sensor_name</td>
                 <td>@d.warning_time</td>
                 <td>@d.warning_time_end</td>
                 <td>@d.dangerous_value</td>
             </tr>
-    }
-    else
+            }
+        }
+    @foreach (azot_proj1.Models.QueryResultModel d in Model)
     {
-        <tr >
-            <td> @d.sensor_name</td>
-            <td>@d.warning_time</td>
-            <td>@d.warning_time_end</td>
-            <td>@d.dangerous_value</td>
-        </tr>
-}
-}
+        if (d.sensor_type_id != ViewBag.st_id)
+        {
+
+            {
+            <tr>
+                <td> @d.sensor_name</td>
+                <td>@d.warning_time</td>
+                <td>@d.warning_time_end</td>
+                <td>@d.dangerous_value</td>
+            </tr>
+            }
+        }
+    }
 
     </table>
 </div>

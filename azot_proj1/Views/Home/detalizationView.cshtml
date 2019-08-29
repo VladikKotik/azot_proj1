@@ -58,7 +58,7 @@
         <p style="display: none"> @Ajax.ActionLink(linkText: "info", actionName: "DetailedWarningsOfWorkshop", routeValues: new { ws_id = "in_id",st_id="st_id" ,viewtype = "ws" }, ajaxOptions: new AjaxOptions { UpdateTargetId = "second_table" }, htmlAttributes: new { @id = "detailclick", @class = "mysubmit" }) </p>
 
         <script>
-            //var gc = true;
+            //обновление обеих таблиц после выбора другого цеха в выпадающем списке
             document.getElementById('ddlist').onchange = function () {
                 var path = document.getElementById('anchorclick').href;
                 path = path.split("=")[0] + "=" + document.getElementById('ddlist').value;
@@ -71,6 +71,7 @@
                 showdetails(document.getElementById('ddlist').value, 0,0);
             };
 
+            //обновление обеих таблиц после нажатия на кнопку "обновить"
             document.getElementById('refresh_button').onclick = function () {
                 var path = document.getElementById('anchorclick').href;
                 path = path.split("=")[0] + "=" + document.getElementById('ddlist').value;
@@ -81,18 +82,17 @@
                     myNode.removeChild(myNode.firstChild);
                 }
                 showdetails(document.getElementById('ddlist').value, 0, 0);
-
             };
 
-            function showdetails(ws_id,st_id) {
+            //отображения второй таблицы при нажатии на кнопку в первой в режиме выделения или фильтрации
+            function showdetails(ws_id, st_id) {
                 var path = document.getElementById('detailclick').href;
 
-                //filter 1 ; videlenie 2;
                 document.getElementById("ws_id").value = ws_id;
                 document.getElementById("st_id").value = st_id;
 
                 if (document.getElementById("filter_radio").checked) {
-                    //alert(1);
+
                     path = path.split("=")[0] + "=" + ws_id + "&st_id=" + st_id + "&viewtype=1";
                 }
                 if (document.getElementById("videlenie_radio").checked) {
@@ -102,16 +102,17 @@
                 document.getElementById('detailclick').click();
             }
 
+
+            //отображения второй таблицы при изменении режима просмотра (выделение или фильтрация)
             function othershowdetails() {
                 var path = document.getElementById('detailclick').href;
 
-                //filter 1 ; videlenie 2;
                 ws_id = document.getElementById("ws_id").value;
                 st_id = document.getElementById("st_id").value;
 
 
                 if (document.getElementById("filter_radio").checked) {
-                    //alert(1);
+
                     path = path.split("=")[0] + "=" + ws_id + "&st_id=" + st_id + "&viewtype=1";
                 }
                 if (document.getElementById("videlenie_radio").checked) {
@@ -128,7 +129,13 @@
                 min-height: 300px;
             }
 
-           
+           table.second_table {
+                overflow-y: scroll;
+                max-height: 300px;
+                display: table-cell;
+            }
+        
+
         </style>
 
     </div>
